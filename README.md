@@ -1,7 +1,16 @@
-# truffle-init-default
+Voting System on Blockchain
 
-Default project for Truffle: example contracts, migrations and tests
+1. Deploy AuthenticationManager, get contract address
+2. Deploy PartyManager with address of AuthenticationManager.
+push parties
 
-## Usage
+3. Deploy VoterManager with address of AuthenticationManager.
+push valid voters
 
-See the [Truffle documentation](http://truffleframework.com/docs/) for more info.
+4. Deploy VoteManager with address of AuthenticationManager.
+
+=> add addresses of PartyManager and VoterManager in it.
+
+=> open voting
+
+=> good to go with voting.
