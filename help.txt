@@ -1,0 +1,15 @@
+1. start a ganache-cli server
+=> ganache-cli
+
+2. go to my project directory
+=> cd ~/2019/voting 
+
+3. Chnage version of the node
+nvm use v11.0.0
+
+4. Compile the project
+sudo truffle compile --all && truffle migrate --reset
+
+5. Go to truffle consle
+truffle console
+
