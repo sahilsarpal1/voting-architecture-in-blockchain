@@ -13,7 +13,7 @@ sudo truffle compile --all && truffle migrate --reset
 5. Go to truffle consle
 truffle console
 
-
+admin - 0x010D543ffC6754e68054B242638CdA5A2d143A40
 
 AuthenticationManager  - https://ropsten.etherscan.io/tx/0x954d270abdd50c5e618d799104da4e23e295a67df638fb4f5891f41f18e4f29e
 0x6108b0beb8b6d9c13c4f968a1160c6a9d1f0c5d3
@@ -25,3 +25,11 @@ PartyManager - https://ropsten.etherscan.io/tx/0xee14b12fac003805a392e6281e24260
 VoterManager - https://ropsten.etherscan.io/tx/0xe50ec62eaaa62d3d6051b26bc95a7465e02e95555438dc9d7195ea453ecd88af
 0x2276ae4ee3c580c5ec366eadbfb8d9688f7d0e44
 
+VoteManager - https://ropsten.etherscan.io/tx/0xbaefb9f15f2ffe0f308c7c5dc1ccdedb3eeb9dab7d11fbe2ec399b65b9fd841a
+ 0x7beb5dab3543c2c892cb901f450f3e8df7947891 
+
+
+Before Start voting
+=> have to give party manager address
+=> have to give voter manager address
+=> start the voting

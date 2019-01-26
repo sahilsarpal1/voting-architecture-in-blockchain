@@ -39,19 +39,19 @@ contract VoteManager {
     /* Ensures that once the Sale is over this contract cannot be used until the point it is destructed. */
     modifier onlyDuringVoting {
 
-        if ( (!voterManagerContractDefined) || (!partyManagerContractDefined) || ( !votingPhase) ) revert("Not a good time to vote");
+        if ( (!voterManagerContractDefined) || (!partyManagerContractDefined) || ( !votingPhase) ) revert();
         _;
     }
 
     /* This modifier allows a method to only be called by current admins */
     modifier adminOnly {
-        if (!authenticationManager.isCurrentAdmin(msg.sender)) revert("only an admin can perform this job.");
+        if (!authenticationManager.isCurrentAdmin(msg.sender)) revert();
         _;
     }
 
     /* This modifier allows a method to only be called by current voters */
     modifier voterOnly {
-        if (!voterManagerContractDefined.isCurrentVoter(msg.sender)) revert("only a voter can perform this job.");
+        if (!voterManager.isCurrentVoter(msg.sender)) revert();
         _;
     }
 
@@ -67,7 +67,7 @@ contract VoteManager {
     function setVoterManagerContractAddress(address _voterManagerContract) adminOnly {
         /* This can only happen once in the lifetime of this contract */
         if (voterManagerContractDefined)
-            revert("vote manager contract is not defined.");
+            revert();
 
         /* Setup access to our voter manager */
         voterManager = VoterManager(_voterManagerContract);
@@ -95,7 +95,7 @@ contract VoteManager {
         require(validParty(_party));
         
         // apply vote logic here
-        votingResult[_party] += votingResult[_party];
+        votingResult[_party] = ++votingResult[_party];
     }
 
     // @return true if the transaction can buy tokens
