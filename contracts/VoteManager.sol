@@ -90,7 +90,7 @@ contract VoteManager {
 
 
     /* Handle receiving vote in voting phase */
-    function vote(string _party) onlyDuringVoting onlyVoter {
+    function vote(string _party) onlyDuringVoting voterOnly {
 
         require(validParty(_party));
         

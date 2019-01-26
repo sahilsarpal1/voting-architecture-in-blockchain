@@ -13,3 +13,15 @@ sudo truffle compile --all && truffle migrate --reset
 5. Go to truffle consle
 truffle console
 
+
+
+AuthenticationManager  - https://ropsten.etherscan.io/tx/0x954d270abdd50c5e618d799104da4e23e295a67df638fb4f5891f41f18e4f29e
+0x6108b0beb8b6d9c13c4f968a1160c6a9d1f0c5d3
+
+
+PartyManager - https://ropsten.etherscan.io/tx/0xee14b12fac003805a392e6281e24260efeb13704a35afdb868eb8500eb093898
+ 0xf30ef6ca70f7f8fec256ed3395e662570e01b7a1
+
+VoterManager - https://ropsten.etherscan.io/tx/0xe50ec62eaaa62d3d6051b26bc95a7465e02e95555438dc9d7195ea453ecd88af
+0x2276ae4ee3c580c5ec366eadbfb8d9688f7d0e44
+
