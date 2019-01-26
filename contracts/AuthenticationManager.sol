@@ -12,8 +12,11 @@ contract AuthenticationManager {
     /* Fired whenever an admin is added to the contract. */
     event AdminAdded(address addedBy, address admin);
 
+    /* Fired whenever an admin is removed from the contract. */
+    event AdminRemoved(address removedBy, address admin);
+
     /* When this contract is first setup we use the creator as the first admin */    
-    AuthenticationManager () {
+    function AuthenticationManager () {
         /* Set the first admin to be the person creating the contract */
         adminAddresses[msg.sender] = true;
         AdminAdded(0, msg.sender);
@@ -22,12 +25,12 @@ contract AuthenticationManager {
     }
 
     /* Gets whether or not the specified address is currently an admin */
-    function isCurrentAdmin(address _address) const returns (bool) {
+    function isCurrentAdmin(address _address) constant returns (bool) {
         return adminAddresses[_address];
     }
 
     /* Gets whether or not the specified address has ever been an admin */
-    function isCurrentOrPastAdmin(address _address) const returns (bool) {
+    function isCurrentOrPastAdmin(address _address) constant returns (bool) {
         for (uint256 i = 0; i < adminAudit.length; i++)
             if (adminAudit[i] == _address)
                 return true;

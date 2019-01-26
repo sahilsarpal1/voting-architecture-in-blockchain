@@ -1,5 +1,7 @@
 pragma solidity ^0.4.11;
 
+import "./AuthenticationManager.sol";
+
 /* The voter manager details voters that have access to certain priviledges and keeps a permanent ledger of who has and has had these rights. */
 contract VoterManager {
    
@@ -12,6 +14,9 @@ contract VoterManager {
     /* Fired whenever an voter is added to the contract. */
     event VoterAdded(address addedBy, address voter);
 
+    /* Fired whenever an voter is removed to the contract. */
+    event VoterRemoved(address addedBy, address voter);
+
     /* Defines the admin contract we interface with for credentails. */
     AuthenticationManager authenticationManager;
 
@@ -22,7 +27,7 @@ contract VoterManager {
     }
 
     /* Create the  voter manager and define the address of the main authentication Manager address. */
-    VoterManager(address _authenticationManagerAddress) {
+    function VoterManager(address _authenticationManagerAddress) {
         
         /* Setup access to our other contracts */
         authenticationManager = AuthenticationManager(_authenticationManagerAddress);
@@ -50,7 +55,7 @@ contract VoterManager {
         
         // Add the voter
         voterAddresses[_address] = true;
-        voterAdded(msg.sender, _address);
+        VoterAdded(msg.sender, _address);
         voterAudit.length++;
         voterAudit[voterAudit.length - 1] = _address;
     }
@@ -65,6 +70,6 @@ contract VoterManager {
 
         /* Remove this voter user */
         voterAddresses[_address] = false;
-        voterRemoved(msg.sender, _address);
+        VoterRemoved(msg.sender, _address);
     }
 }

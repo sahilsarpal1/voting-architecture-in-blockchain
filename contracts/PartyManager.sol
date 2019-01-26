@@ -1,5 +1,7 @@
 pragma solidity ^0.4.11;
 
+import "./AuthenticationManager.sol";
+
 /* The party manager details parties that have access to certain priviledges and keeps a permanent ledger of who has and has had these rights. */
 contract PartyManager {
    
@@ -7,10 +9,13 @@ contract PartyManager {
     mapping (string => bool) parties;
 
     /* Details of all parties that have ever existed */
-    address[] partyAudit;
+    string[] partyAudit;
 
     /* Fired whenever an party is added to the contract. */
-    event partyAdded(address addedBy, string party);
+    event PartyAdded(address addedBy, string party);
+
+    /* Fired whenever an party is removed from the contract. */
+    event PartyRemoved(address removedBy, string party);
 
     /* Defines the admin contract we interface with for credentails. */
     AuthenticationManager authenticationManager;
@@ -22,7 +27,7 @@ contract PartyManager {
     }
 
     /* Create the  party manager and define the address of the main authentication Manager address. */
-    PartyManager(address _authenticationManagerAddress) {
+    function PartyManager(address _authenticationManagerAddress) {
         
         /* Setup access to our other contracts */
         authenticationManager = AuthenticationManager(_authenticationManagerAddress);
@@ -36,7 +41,7 @@ contract PartyManager {
     /* Gets whether or not the specified party has ever been an valid party */
     function isCurrentOrPastParty(string _party) constant returns (bool) {
         for (uint256 i = 0; i < partyAudit.length; i++)
-            if (partyAudit[i] == _party)
+            if (keccak256(partyAudit[i]) == keccak256(_party))
                 return true;
         return false;
     }
@@ -45,12 +50,12 @@ contract PartyManager {
     function addParty(string _party) adminOnly {
 
         // Fail if this account is already party
-        if (parties[_add_partyress])
+        if (parties[_party])
             revert();
         
         // Add the party
         parties[_party] = true;
-        partyAdded(msg.sender, _party);
+        PartyAdded(msg.sender, _party);
         partyAudit.length++;
         partyAudit[partyAudit.length - 1] = _party;
     }
@@ -64,6 +69,6 @@ contract PartyManager {
 
         /* Remove this party user */
         parties[_party] = false;
-        partyRemoved(msg.sender, _party);
+        PartyRemoved(msg.sender, _party);
     }
 }
