@@ -32,6 +32,8 @@ contract VoteManager {
     /* Defines our event fired when the Voting is reopened */
     event VotingStarted();
 
+    /* Details of all voters who genuinely voted */
+    mapping (address => bool) voterAddresses;
 
     /* Map votes to parties */
     mapping (string => int) votingResult;
@@ -94,8 +96,15 @@ contract VoteManager {
 
         require(validParty(_party));
         
+        // mustBeAOneTimeVoter 
+        if (voterAddresses[msg.sender])
+            revert();
+
         // apply vote logic here
         votingResult[_party] = ++votingResult[_party];
+
+        // Add the voter
+        voterAddresses[msg.sender] = true;
     }
 
     // @return true if the transaction can buy tokens
